@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Account, Client } from "appwrite";
 import {
   getProjectsOfUser,
   deleteProjectRow,

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ProjectCard from "../components/ProjectCard";
+import ProjectCard from "../components/projectcard";
 import {
   getProjectsOfUser,
   createProjectRecord,
