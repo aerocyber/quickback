@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { account } from "../lib/appwrite";
 
 const AuthContext = createContext();
@@ -7,15 +7,29 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const fetchUser = async () => {
+    try {
+      const res = await account.get();
+      setUser(res);
+    } catch {
+      setUser(null);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    account.get()
-      .then((res) => setUser(res))
-      .catch(() => setUser(null))
-      .finally(() => setLoading(false));
+    fetchUser();
   }, []);
 
+  const logout = async () => {
+    await account.deleteSession("current");
+    setUser(null);
+    window.location.href = "/";
+  };
+
   return (
-    <AuthContext.Provider value={{ user, loading }}>
+    <AuthContext.Provider value={{ user, loading, logout }}>
       {children}
     </AuthContext.Provider>
   );
