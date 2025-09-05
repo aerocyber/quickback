@@ -6,8 +6,8 @@ export default function Login() {
   const handleGithubLogin = () => {
     account.createOAuth2Session({
       provider: OAuthProvider.Github,
-      success: "https://quickback.appwrite.network/", // redirect here on success
-      failure: "https://quickback.appwrite.network/login", // redirect here on failure
+      success: "https://quickback.appwrite.network", // redirect here on success
+      failure: "https://quickback.appwrite.network", // redirect here on failure
       scopes: ["user"], // scopes (optional)
     });
   };
