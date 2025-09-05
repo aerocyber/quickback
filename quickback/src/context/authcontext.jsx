@@ -1,44 +1,24 @@
-// src/context/AuthContext.jsx
-import { createContext, useContext, useEffect, useState } from "react";
-import { account } from "../lib/appwrite";
+import { createContext, useContext, useState, useEffect } from "react";
+import { account } from "./appwrite";
 
 const AuthContext = createContext();
 
-export function AuthProvider({ children }) {
+export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchUser() {
-      try {
-        const current = await account.get();
-        setUser(current);
-      } catch {
-        setUser(null);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchUser();
+    account.get()
+      .then((res) => setUser(res))
+      .catch(() => setUser(null))
+      .finally(() => setLoading(false));
   }, []);
 
-  if (loading) {
-    // full-page loader
-    return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
-        <span className="ml-4 text-lg">Loading...</span>
-      </div>
-    );
-  }
-
   return (
-    <AuthContext.Provider value={{ user, setUser }}>
+    <AuthContext.Provider value={{ user, loading }}>
       {children}
     </AuthContext.Provider>
   );
-}
+};
 
-export function useAuth() {
-  return useContext(AuthContext);
-}
+export const useAuth = () => useContext(AuthContext);
