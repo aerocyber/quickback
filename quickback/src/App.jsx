@@ -30,6 +30,8 @@ export default function App() {
   return (
     <>
       <Navbar />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route
@@ -40,8 +42,6 @@ export default function App() {
             </ProtectedRoute>
           }
         />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
         <Route
           path="/account"
           element={
