@@ -1,11 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./Navbar";
-import HomeUser from "./HomeUser";
-import HomeGuest from "./HomeGuest";
-import Login from "./login";
-import Signup from "./signup";
-import AccountPage from "./account";
-import { useAuth } from "./authcontext";
+import Navbar from "./components/navbar";
+import HomeUser from "./pages/HomeUser";
+import HomeGuest from "./pages/HomeGuest";
+import Login from "./pages/login";
+import Signup from "./pages/signup";
+import AccountPage from "./pages/account";
+import { useAuth } from "./context/authcontext";
 
 export default function App() {
   const { user, loading } = useAuth();
