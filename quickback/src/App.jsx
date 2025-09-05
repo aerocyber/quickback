@@ -1,9 +1,8 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, HashRouter, BrowserRouter } from "react-router-dom";
 import ProjectStats from "./components/projectstats";
 import Navbar from "./components/navbar";
 import Home from "./pages/home";
 import Login from "./pages/login";
-import Signup from "./pages/signup";
 import AccountPage from "./pages/account";
 import ProtectedRoute from "./components/protectedroute";
 import { useEffect, useState } from "react";
@@ -30,27 +29,26 @@ export default function App() {
   return (
     <>
       <Navbar />
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route
-          path="/project/:id"
-          element={
-            <ProtectedRoute>
-              <ProjectStats />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/account"
-          element={
-            <ProtectedRoute>
-              <AccountPage />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/project/:id"
+            element={
+              <ProtectedRoute>
+                <ProjectStats />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/account"
+            element={
+              <ProtectedRoute>
+                <AccountPage />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
     </>
   );
 }
